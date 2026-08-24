@@ -25,7 +25,7 @@ This repository contains the **river-data pipeline, ghost-node construction, GNN
 
 <p align="center">
   <a href="assets/model1.pdf">
-    <img src="assets/model1.jpg" width="1000" alt="gTFP framework">
+    <img src="assets/model1.webp" width="900" alt="gTFP framework">
   </a>
 </p>
 
@@ -52,7 +52,7 @@ The main river experiment uses a connected Danube subnetwork extracted from **La
 
 <p align="center">
   <a href="assets/river_topo1.pdf">
-    <img src="assets/river_topo1.jpg" width="760" alt="LamaH-CE river topology">
+    <img src="assets/river_topo1.webp" width="650" alt="LamaH-CE river topology">
   </a>
 </p>
 
@@ -80,9 +80,9 @@ Ghost-Node-GNN/
 │
 └── assets/
     ├── model1.pdf             # Original method figure from the paper
-    ├── model1.jpg             # README render of model1.pdf
+    ├── model1.webp            # README render of model1.pdf
     ├── river_topo1.pdf        # Original river-topology figure from the paper
-    └── river_topo1.jpg        # README render of river_topo1.pdf
+    └── river_topo1.webp       # README render of river_topo1.pdf
 ```
 
 ### Main execution path
