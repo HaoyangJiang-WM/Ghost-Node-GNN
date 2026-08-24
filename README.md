@@ -1,8 +1,8 @@
 # Boundary-Consistent Graph Neural Networks for Topological Flux Prediction
 
-Official implementation of **gTFP** for boundary-consistent flux prediction on directed physical networks.
+Official code for the TMLR paper **Boundary-Consistent Graph Neural Networks for Topological Flux Prediction**.
 
-Standard message-passing GNNs can suffer from large errors at upstream boundary nodes because the observed graph does not explicitly contain the external boundary context that drives transport. **gTFP** augments each boundary node with a learned ghost-node proxy and uses boundary-consistent message passing to infer this missing context and propagate it into the river interior.
+This repository studies the boundary-context closure deficit in GNN-based flux prediction. It introduces learned ghost-node proxies for missing upstream boundary context, together with implicit fixed-point and explicit inverse-operator solvers for boundary-consistent graph learning.
 
 **Paper:** [Transactions on Machine Learning Research (TMLR), 2026](https://openreview.net/forum?id=31gTIfhoH0)
 
@@ -10,7 +10,9 @@ Standard message-passing GNNs can suffer from large errors at upstream boundary 
 
 The main river experiment uses a connected **358-node / 357-edge** Danube subnetwork extracted from LamaH-CE. The graph contains **209 boundary nodes** and **149 interior nodes**.
 
-![LamaH-CE river topology with boundary and interior nodes](assets/river_topology.jpg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/HaoyangJiang-WM/Ghost-Node-GNN/main/assets/river_topology.jpg" width="900" alt="LamaH-CE river topology with boundary and interior nodes">
+</p>
 
 ## River Dataset
 
@@ -38,8 +40,8 @@ dataset = LamaHDataset(
 )
 
 sample = dataset[0]
-print(sample.x.shape)          # node histories + ghost-node placeholders
-print(sample.y.shape)          # discharge target on the 358 real river nodes
+print(sample.x.shape)
+print(sample.y.shape)
 print(sample.edge_index.shape)
 ```
 
@@ -49,18 +51,18 @@ Mean test MSE across the three GNN backbones reported in the paper:
 
 | Method | Overall MSE | Boundary MSE | Interior MSE |
 |---|---:|---:|---:|
-| Base GNNs | 0.1218 | 0.1439 | 0.0905 |
-| **gTFP** | **0.1114** | **0.1280** | **0.0885** |
-| Implicit GNN + Ghost | **0.1084** | **0.1235** | **0.0867** |
+| Avg. Base GNNs | 0.1218 | 0.1439 | 0.0905 |
+| gTFP Avg. | **0.1114** | **0.1280** | **0.0885** |
+| Implicit GNN w/ Ghost | **0.1084** | **0.1235** | **0.0867** |
 
-Relative to the base GNN average, gTFP reduces **overall MSE by 8.5%** and **boundary-node MSE by 11.0%** on the river benchmark.
+Averaged across the three GNN backbones, learned ghost nodes reduce the overall MSE by **8.5%** and the boundary-node MSE by **11.0%** on the river benchmark.
 
 ## Code
 
 Core files:
 
 - `dataset_ext1.py`: LamaH-CE download, preprocessing, graph construction, and ghost-node augmentation.
-- `models_ext1.py`: gTFP model components.
+- `models_ext1.py`: model components.
 - `functions_ext1.py`: training/evaluation utilities.
 - `train_full.py`: training entry point.
 
